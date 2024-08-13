@@ -8,22 +8,23 @@ import {
 import { Game } from "../hooks/useGames";
 import PlattformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
+import getCroppedImageUrl from "../services/image-url";
 
 type GameCardProps = {
-  games: Game;
+  game: Game;
 };
 
-const GameCard = ({ games }: GameCardProps) => {
+const GameCard = ({ game }: GameCardProps) => {
   return (
     <Card borderRadius={10} overflow="hidden">
-      <Image src={games.background_image} />
+      <Image src={getCroppedImageUrl(game.background_image)} />
       <CardBody>
-        <Heading fontSize="2xl">{games.name}</Heading>
+        <Heading fontSize="2xl">{game.name}</Heading>
         <HStack justifyContent="space-between">
           <PlattformIconList
-            platforms={games.parent_platforms.map((p) => p.platform)}
+            platforms={game.parent_platforms.map((p) => p.platform)}
           />
-          <CriticScore score={games.metacritic} />
+          <CriticScore score={game.metacritic} />
         </HStack>
       </CardBody>
     </Card>
