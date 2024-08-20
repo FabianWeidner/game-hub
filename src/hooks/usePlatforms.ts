@@ -1,12 +1,12 @@
 import useData from "./useData";
 
-export type Platforms = {
+export type Platform = {
   id: number;
   name: string;
   slug: string;
 };
 
 const usePlatforms = () =>
-  useData<Platforms>("/platforms/lists/parents");
+  useData<Platform>("/platforms/lists/parents");
 
 export default usePlatforms;
