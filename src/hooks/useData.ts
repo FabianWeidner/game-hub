@@ -2,15 +2,15 @@ import { AxiosRequestConfig, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
-type FetchResponse<T> = {
+interface FetchResponse<T> {
   count: number;
   results: T[];
-};
+}
 
 const useData = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
-  deps?: React.DependencyList[]
+  deps?: any[]
 ) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState("");
@@ -19,6 +19,7 @@ const useData = <T>(
   useEffect(
     () => {
       const controller = new AbortController();
+
       setLoading(true);
       apiClient
         .get<FetchResponse<T>>(endpoint, {
@@ -34,6 +35,7 @@ const useData = <T>(
           setError(err.message);
           setLoading(false);
         });
+
       return () => controller.abort();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

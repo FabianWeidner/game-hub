@@ -18,9 +18,12 @@ export type GameQuery = {
 };
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>(
-    {} as GameQuery
-  );
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    genre: null,
+    platform: null,
+    sortOrder: "",
+    searchText: "",
+  });
 
   return (
     <Grid
